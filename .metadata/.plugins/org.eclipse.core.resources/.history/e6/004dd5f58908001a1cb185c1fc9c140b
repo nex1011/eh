@@ -24,16 +24,12 @@ public class Client extends Application{
 		
 		// Creating the Rows
 		HBox row1 = createRow(1);
-		HBox row2 = createRow(2);
-		HBox row3 = createRow(3);
 		
 		// Creating the VBox that will hold the rows
 		VBox rows = new VBox();
 		
 		// Adding the rows to the VBox
 		rows.getChildren().add(row1);
-		rows.getChildren().add(row2);
-		rows.getChildren().add(row3);
 		
 		// Creating the Scene
 		Scene gameScene = new Scene(rows, 400, 300);
@@ -43,7 +39,7 @@ public class Client extends Application{
 	}
 	
 	
-	// This method will create 1 row of buttons in a HBox.
+	// This method will create 1 row of buttons in a HBox
 	public HBox createRow(int rowNum) {
 		
 		// Creating the HBox
@@ -85,7 +81,7 @@ public class Client extends Application{
 		// Adding action events to buttons
 		b1.setOnAction(b1Event);
 		b2.setOnAction(b2Event);
-		b3.setOnAction(b3Event);
+		b3.setOnAction(b2Event);
 		
 		// Setting the button size
 		b1.setMinSize(100, 50);

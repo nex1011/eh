@@ -85,7 +85,7 @@ public class Client extends Application{
 		// Adding action events to buttons
 		b1.setOnAction(b1Event);
 		b2.setOnAction(b2Event);
-		b3.setOnAction(b3Event);
+		b3.setOnAction(b2Event);
 		
 		// Setting the button size
 		b1.setMinSize(100, 50);
