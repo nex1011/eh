@@ -90,7 +90,6 @@ public class Client extends Application{
 		
 		// Adding padding
 		buttonRow.setSpacing(15);
-		buttonRow.setPadding(new Insets(15, 15, 15, 15));
 		
 		// Adding buttons to HBox
 		buttonRow.getChildren().add(b1);

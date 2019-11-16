@@ -4,7 +4,6 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
 import javafx.event.*;
-import javafx.geometry.Insets;
 
 public class Client extends Application{
 
@@ -60,42 +59,15 @@ public class Client extends Application{
 			}
 		};
 		
-		EventHandler<ActionEvent> b2Event = new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent e) {
-				
-				System.out.println("Button Pressed at row " + rowNum + " column 2");
-			}
-		};
-		
-		EventHandler<ActionEvent> b3Event = new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent e) {
-				
-				System.out.println("Button Pressed at row " + rowNum + " column 3");
-			}
-		};
-		
 		// Adding action events to buttons
 		b1.setOnAction(b1Event);
-		b2.setOnAction(b2Event);
-		b3.setOnAction(b2Event);
 		
-		// Setting the button size
+		// Setting up the Button
 		b1.setMinSize(100, 50);
-		b2.setMinSize(100, 50);
-		b3.setMinSize(100, 50);
-		
-		// Adding padding
-		buttonRow.setSpacing(15);
-		buttonRow.setPadding(new Insets(15, 15, 15, 15));
+		b1.setLayoutX(15);;
 		
 		// Adding buttons to HBox
 		buttonRow.getChildren().add(b1);
-		buttonRow.getChildren().add(b2);
-		buttonRow.getChildren().add(b3);
 		
 		// Returning the button row
 		return buttonRow;
