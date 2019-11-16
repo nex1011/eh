@@ -1,0 +1,47 @@
+import java.awt.Button;
+
+import javafx.application.Application;
+import javafx.scene.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+import javafx.event.*;
+
+public class Client extends Application{
+
+	public void start(Stage primaryStage) {
+		
+		primaryStage.show();
+	}
+	
+	// This method will create 1 row of buttons in a HBox
+	public HBox createRow(int rowNum) {
+		
+		// Creating the HBox
+		HBox buttonRow = new HBox();
+		
+		// Creating the Buttons
+		Button b1 = new Button();
+		Button b2 = new Button();
+		Button b3 = new Button();
+		
+		// Creating the action events
+		EventHandler<ActionEvent> b1Event = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent e) {
+				
+				System.out.println("Button Pressed at row " + rowNum + " column 1");
+			}
+			
+			
+		};
+		
+		// Returning the button row
+		return buttonRow;
+	}
+	
+	public static void main(String[] args) {
+		
+		launch();
+	}
+}
