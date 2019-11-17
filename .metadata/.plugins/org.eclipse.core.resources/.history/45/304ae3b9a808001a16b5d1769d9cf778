@@ -1,0 +1,24 @@
+import java.io.*;
+import java.net.*;
+
+public class Server extends Thread{
+	
+	public static final int PORT_NUMBER = 9001;
+	
+	protected Socket socket;
+	
+	public void run() {
+		
+		InputStream in = null;
+		OutputStream out = null;
+		
+		try {
+			
+			
+		} catch(Throwable e) {System.out.println(e.toString()); }
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+}

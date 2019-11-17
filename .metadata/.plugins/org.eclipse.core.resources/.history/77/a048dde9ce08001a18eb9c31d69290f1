@@ -1,0 +1,154 @@
+import java.io.*;
+import java.net.*;
+
+import javafx.application.*;
+import javafx.event.*;
+import javafx.geometry.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+
+public class Client extends Application{
+	
+	public static final String HOST = "127.0.0.1";
+	public static final double WIDTH = 100;
+	public static final double HEIGHT = 50;
+	
+	
+	private PrintWriter out;
+	private BufferedReader in;
+	
+	// Button names are r = row, c = column
+	private Button r0c0;
+	private Button r0c1;
+	private Button r0c2;
+	private Button r1c0;
+	private Button r1c1;
+	private Button r1c2;
+	private Button r2c0;
+	private Button r2c1;
+	private Button r2c2;
+	
+	// Player variables
+	private int playerNum;
+	private boolean turn;
+	
+	// This is used to track which buttons have been used
+	private boolean[] used;
+	
+	public void start(Stage primaryStage) {
+		
+		try {
+			
+			Socket socket = null;
+			out = null;
+			in = null;
+			
+			try {
+				socket = new Socket(HOST, Server.PORT);
+				out = new PrintWriter(socket.getOutputStream(), true);
+				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				
+				playerNum = in.read();
+
+				System.out.println(playerNum);
+				
+				primaryStage.setTitle("Tic Tac Toe");
+				primaryStage.show();
+				
+			} catch(Throwable e) { System.out.println(e.toString()); }
+		} catch(Throwable e) { System.out.println(e.toString()); }
+		
+		// Creating Buttons
+		r0c0 = new Button();
+		r0c1 = new Button();
+		r0c2 = new Button();
+		r1c0 = new Button();
+		r1c1 = new Button();
+		r1c2 = new Button();
+		r2c0 = new Button();
+		r2c1 = new Button();
+		r2c2 = new Button();
+		
+		// Adding eventHandlers
+		r0c0.setOnAction(createEventHandler(0,0));
+		r0c1.setOnAction(createEventHandler(0,1));
+		r0c2.setOnAction(createEventHandler(0,2));
+		r1c0.setOnAction(createEventHandler(1,0));
+		r1c1.setOnAction(createEventHandler(1,1));
+		r1c2.setOnAction(createEventHandler(1,2));
+		r2c0.setOnAction(createEventHandler(2,0));
+		r2c1.setOnAction(createEventHandler(2,1));
+		r2c2.setOnAction(createEventHandler(2,2));
+		
+		//Setting up the Buttons
+		r0c0.setPrefSize(WIDTH,  HEIGHT);
+		r0c1.setPrefSize(WIDTH,  HEIGHT);
+		r0c2.setPrefSize(WIDTH,  HEIGHT);
+		r1c0.setPrefSize(WIDTH,  HEIGHT);
+		r1c1.setPrefSize(WIDTH,  HEIGHT);
+		r1c2.setPrefSize(WIDTH,  HEIGHT);
+		r2c0.setPrefSize(WIDTH,  HEIGHT);
+		r2c1.setPrefSize(WIDTH,  HEIGHT);
+		r2c2.setPrefSize(WIDTH,  HEIGHT);
+		
+		// Creating VBoxes to hold Buttons
+		VBox row0 = new VBox();
+		VBox row1 = new VBox();
+		VBox row2 = new VBox();
+		
+		// Setting up the rows
+		row0.setPadding(new Insets(15, 15, 15, 15));
+		row1.setPadding(new Insets(15, 15, 15, 15));
+		row2.setPadding(new Insets(15, 15, 15, 15));
+		
+		// Adding the Buttons
+		row0.getChildren().add(r0c0);
+		row0.getChildren().add(r0c1);
+		row0.getChildren().add(r0c2);
+		row1.getChildren().add(r1c0);
+		row1.getChildren().add(r1c1);
+		row1.getChildren().add(r1c2);
+		row2.getChildren().add(r2c0);
+		row2.getChildren().add(r2c1);
+		row2.getChildren().add(r2c2);
+		
+		// Creating HBox to hold the rows
+		HBox rows = new HBox();
+		
+		// Setting up the HBox
+		rows.setPadding(new Insets(15, 15, 15, 15));
+		
+		// Adding the rows
+		rows.getChildren().add(row0);
+		rows.getChildren().add(row1);
+		rows.getChildren().add(row2);
+		
+		// Creating the Scene
+		Scene scene = new Scene(rows, 400, 300);
+		
+		// Setting the stage
+		primaryStage.setTitle("Tic Tac Toe");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+	
+	public EventHandler<ActionEvent> createEventHandler(int row, int column) {
+		
+		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent e) {
+				
+				// out.write(playerNum + "," + row + "," + column);
+			}
+		};
+		
+		return event;
+	}
+	
+	public static void main(String[] args) {
+		
+		launch();
+	}
+}

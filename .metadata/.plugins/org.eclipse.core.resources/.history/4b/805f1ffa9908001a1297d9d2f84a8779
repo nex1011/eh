@@ -1,0 +1,21 @@
+import java.net.*;
+
+public class Server {
+	
+	
+	public static void main(String[] args) {
+		
+		try {
+			
+			// Creating the server Socket
+			ServerSocket server = new ServerSocket(9001);
+			
+			// Accepting client sockets
+			Socket client1 = server.accept();
+			
+			Socket client2 = server.accept();
+			
+			System.out.println("connected");
+		} catch(Throwable e) { System.out.println(e.toString()); }
+	}
+}

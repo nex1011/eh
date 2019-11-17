@@ -1,0 +1,23 @@
+import java.io.*;
+import java.net.*;
+
+import javafx.application.*;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+
+public class Client extends Application{
+	
+	public void start(Stage primaryStage) {
+		
+		primaryStage.setTitle("Tic Tac Toe");
+		primaryStage.show();
+	}
+	
+	public static void main(String[] args) {
+		
+		launch();
+	}
+}

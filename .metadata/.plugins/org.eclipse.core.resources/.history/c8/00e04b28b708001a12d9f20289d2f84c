@@ -1,0 +1,15 @@
+import java.io.*;
+import java.net.*;
+
+public class Server extends Thread{
+	
+	public static final int PORT = 9001;
+	
+	public static void main(String[] args) {
+	
+		try {
+			
+			ServerSocket server = new ServerSocket(PORT);
+		} catch(Throwable e) { System.out.println(e.toString()); }
+	}
+}

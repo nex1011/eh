@@ -1,0 +1,86 @@
+import java.io.*;
+import java.net.*;
+
+import javafx.application.*;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+
+public class Client extends Application{
+	
+	public static final String HOST = "127.0.0.1";
+	
+	PrintWriter out;
+	BufferedReader in;
+	
+	// Button names are r = row, c = column
+	Button r0c0;
+	Button r0c1;
+	Button r0c2;
+	Button r1c0;
+	Button r1c1;
+	Button r1c2;
+	Button r2c0;
+	Button r2c1;
+	Button r2c2;
+	
+	private int playerNum;
+	
+	public void start(Stage primaryStage) {
+		
+		try {
+			
+			Socket socket = null;
+			out = null;
+			in = null;
+			
+			try {
+				socket = new Socket(HOST, Server.PORT);
+				out = new PrintWriter(socket.getOutputStream(), true);
+				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				
+				playerNum = in.read();
+
+				System.out.println(playerNum);
+				
+				primaryStage.setTitle("Tic Tac Toe");
+				primaryStage.show();
+				
+			} catch(Throwable e) { System.out.println(e.toString()); }
+		} catch(Throwable e) { System.out.println(e.toString()); }
+		
+		// Creating Buttons
+		r0c0 = new Button();
+		r0c1 = new Button();
+		r0c2 = new Button();
+		r1c0 = new Button();
+		r1c1 = new Button();
+		r1c2 = new Button();
+		r2c0 = new Button();
+		r2c1 = new Button();
+		r2c2 = new Button();
+		
+		primaryStage.setTitle("Tic Tac Toe");
+		primaryStage.show();
+	}
+	
+	public EventHandler<ActionEvent> createEventHandler(int row, int column) {
+		
+		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+			
+			public void handle(ActionEvent e) {
+				
+				out.
+			}
+		};
+		
+		return event;
+	}
+	
+	public static void main(String[] args) {
+		
+		launch();
+	}
+}

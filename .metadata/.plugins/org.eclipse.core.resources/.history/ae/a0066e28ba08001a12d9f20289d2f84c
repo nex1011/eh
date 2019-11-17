@@ -1,0 +1,50 @@
+import java.io.*;
+import java.net.*;
+
+import javafx.application.*;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+
+public class Client extends Application{
+	
+	public static final String HOST = "127.0.0.1";
+	
+	private int playerNum;
+	
+	public void start(Stage primaryStage) {
+		
+		try {
+			
+			Socket socket = null;
+			PrintWriter out = null;
+			BufferedReader in = null;
+			
+			try {
+				socket = new Socket(HOST, Server.PORT);
+				out = new PrintWriter(socket.getOutputStream(), true);
+				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				
+				System.out.println(in.read());
+
+				System.out.println(playerNum);
+				
+				primaryStage.setTitle("Tic Tac Toe");
+				primaryStage.show();
+				
+			} catch(Throwable e) { System.out.println(e.toString()); }
+		} catch(Throwable e) { System.out.println(e.toString()); }
+		
+		System.out.println(playerNum);
+		
+		primaryStage.setTitle("Tic Tac Toe");
+		primaryStage.show();
+	}
+	
+	public static void main(String[] args) {
+		
+		launch();
+	}
+}

@@ -1,0 +1,25 @@
+import java.io.*;
+import java.net.*;
+
+public class Server {
+	
+	
+	public static void main(String[] args) {
+		
+		try {
+			
+			// Creating the server Socket
+			ServerSocket server = new ServerSocket(9001);
+			
+			// Creating Sockets
+			Socket client1Socket = server.accept();
+			Socket client2Socket = server.accept();
+			
+			// Creating input Streams
+			DataInputStream client1Input = new DataInputStream(new BufferedInputStream(client1Socket.getInputStream()));
+			DataInputStream client2Input = new DataInputStream(new BufferedInputStream(client2Socket.getInputStream()));
+			
+			System.out.println("connected");
+		} catch(Throwable e) { System.out.println(e.toString()); }
+	}
+}

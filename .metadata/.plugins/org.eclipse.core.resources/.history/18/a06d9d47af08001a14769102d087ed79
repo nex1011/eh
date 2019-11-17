@@ -1,0 +1,72 @@
+import java.io.*;
+import java.net.*;
+
+public class Server extends Thread{
+	
+	public static final int PORT_NUMBER = 9001;
+	
+	private int counter = 1; // Used to track player numbers
+	
+	protected Socket socket;
+	
+	private Server(Socket socket) {
+		
+		this.socket = socket;
+		start();	
+	}
+	
+	public void run() {
+		
+		InputStream in = null;
+		OutputStream out = null;
+		
+		try {
+			in = socket.getInputStream();
+			out = socket.getOutputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			String request;
+			
+			while((request = reader.readLine()) != null) {
+				
+                System.out.println("Message received:" + request);
+                request += '\n';
+                out.write(request.getBytes());
+			}
+			
+		} catch(Throwable e) {System.out.println(e.toString()); }
+		finally {
+			
+			try {
+				in.close();
+				out.close();
+				socket.close();
+			} catch(Throwable e) {System.out.println(e.toString()); }
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		
+		ServerSocket server = null;
+		
+		try {
+			
+			server = new ServerSocket(PORT_NUMBER);
+			
+			while(true) {
+				
+				new Server(server.accept());
+			}
+		} catch(Throwable e) {System.out.println(e.toString()); }
+		finally {
+			
+			try {
+			
+				if (server != null) {
+					
+					server.close();
+				}
+			} catch(Throwable e) {System.out.println(e.toString()); }
+		}
+	}
+}

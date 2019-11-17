@@ -1,0 +1,30 @@
+import java.io.*;
+import java.net.*;
+
+public class Server extends Thread{
+	
+	public static final int PORT = 9001;
+	
+	public static void main(String[] args) {
+	
+		try {
+			
+			// Setting up the sockets
+			ServerSocket server = new ServerSocket(PORT);
+			Socket client1Socket = server.accept();
+			Socket client2Socket = server.accept();
+			
+			// Setting up the I/O
+			InputStream client1Input = client1Socket.getInputStream();
+			InputStream client2Input = client2Socket.getInputStream();
+			OutputStream client1Output = client1Socket.getOutputStream();
+			OutputStream client2Output = client2Socket.getOutputStream();
+			BufferedReader client1Reader= new BufferedReader(new InputStreamReader(client1Input));
+			BufferedReader client2Reader= new BufferedReader(new InputStreamReader(client2Input));
+			
+			client1Output.write(1);
+			client2Output.write(2);
+			
+		} catch(Throwable e) { System.out.println(e.toString()); }
+	}
+}
