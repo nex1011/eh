@@ -286,7 +286,7 @@ public class Client extends Application{
 		}
 		
 
-		owner[row][column] = player;
+		owner[0][0] = player;
 		checkWin(player);
 		
 	}
@@ -306,9 +306,8 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
 		}
-		if(owner[1][0] == player && owner[1][1] == player && owner[1][2] == player) {
+		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
 
 			disableAll();
 			if(player == playerNum) {
@@ -318,9 +317,8 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
 		}
-		if(owner[2][0] == player && owner[2][1] == player && owner[2][2] == player) {
+		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
 
 			disableAll();
 			if(player == playerNum) {
@@ -330,9 +328,8 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
 		}
-		if(owner[0][0] == player && owner[1][0] == player && owner[2][0] == player) {
+		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
 
 			disableAll();
 			if(player == playerNum) {
@@ -342,9 +339,8 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
 		}
-		if(owner[0][1] == player && owner[1][1] == player && owner[2][1] == player) {
+		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
 
 			disableAll();
 			if(player == playerNum) {
@@ -354,9 +350,8 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
 		}
-		if(owner[0][2] == player && owner[1][2] == player && owner[2][2] == player) {
+		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
 
 			disableAll();
 			if(player == playerNum) {
@@ -366,9 +361,8 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
 		}
-		if(owner[0][0] == player && owner[1][1] == player && owner[2][2] == player) {
+		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
 
 			disableAll();
 			if(player == playerNum) {
@@ -378,9 +372,8 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
 		}
-		if(owner[0][2] == player && owner[1][1] == player && owner[2][0] == player) {
+		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
 
 			disableAll();
 			if(player == playerNum) {
@@ -390,26 +383,6 @@ public class Client extends Application{
 				alert.setTitle("Loser");
 				alert.setContentText("You Lost!");
 			}
-			alert.showAndWait();
-		}
-		
-		// Checking for draw condition
-		boolean isDraw = true;
-		for(int i = 0; i < 3; i++) {
-			
-			for(int j =0; j < 3; j++) {
-				
-				if(owner[i][j] == 0) {
-					isDraw = false;
-				}
-			}
-		}
-		
-		if(isDraw) {
-			
-			alert.setTitle("Draw");
-			alert.setContentText("Game is a draw");
-			alert.showAndWait();
 		}
 	}
 	

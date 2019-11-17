@@ -6,7 +6,6 @@ import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
@@ -37,9 +36,6 @@ public class Client extends Application{
 	
 	// This is used to track which buttons have been used
 	private boolean[][] used; // row / column
-	
-	// This is used to track who owns which button.
-	private int[][] owner;
 	
 	public void start(Stage primaryStage) {
 		
@@ -116,18 +112,6 @@ public class Client extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-		// Setting up the arrays
-		used = new boolean[3][3];
-		owner = new int[3][3];
-		for(int i = 0; i < 3; i ++) {
-			
-			for(int j = 0; j < 3; j++) {
-				
-				used[i][j] = false;
-				owner[i][j] = 0; // 0 is unowned.
-			}
-		}
-		
 		try {
 			
 			socket = null;
@@ -142,9 +126,33 @@ public class Client extends Application{
 				playerNum = in.read();
 				
 				System.out.println(playerNum);
+				System.out.print(in.ready());
+				while(in.ready()) {
+					
+					String message;
+					try {
+						
+						while((message = in.readLine()) != null) {
+							
+							String[] input = message.split(",");
+							claimSpace(Integer.parseInt(input[0]), Integer.parseInt(input[1]),
+									Integer.parseInt(input[2]));
+						}
+					} catch(Throwable e) { System.out.println(e.toString()); }
+				}
 				
 			} catch(Throwable e) { System.out.println(e.toString()); }
 		} catch(Throwable e) { System.out.println(e.toString()); }
+		
+		// Setting up the used array
+		used = new boolean[3][3];
+		for(int i = 0; i < 3; i ++) {
+			
+			for(int j = 0; j < 3; j++) {
+				
+				used[i][j] = false;
+			}
+		}
 	}
 	
 	public EventHandler<ActionEvent> createEventHandler(int row, int column) {
@@ -285,132 +293,6 @@ public class Client extends Application{
 				// enableUnused();
 		}
 		
-
-		owner[row][column] = player;
-		checkWin(player);
-		
-	}
-	
-	public void checkWin(int player) {
-	
-		Alert alert = new Alert(AlertType.INFORMATION);
-		
-		// Checking for win condition
-		if(owner[0][0] == player && owner[0][1] == player && owner[0][2] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		if(owner[1][0] == player && owner[1][1] == player && owner[1][2] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		if(owner[2][0] == player && owner[2][1] == player && owner[2][2] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		if(owner[0][0] == player && owner[1][0] == player && owner[2][0] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		if(owner[0][1] == player && owner[1][1] == player && owner[2][1] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		if(owner[0][2] == player && owner[1][2] == player && owner[2][2] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		if(owner[0][0] == player && owner[1][1] == player && owner[2][2] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		if(owner[0][2] == player && owner[1][1] == player && owner[2][0] == player) {
-
-			disableAll();
-			if(player == playerNum) {
-				alert.setTitle("Winner");
-				alert.setContentText("You Win!");
-			} else {
-				alert.setTitle("Loser");
-				alert.setContentText("You Lost!");
-			}
-			alert.showAndWait();
-		}
-		
-		// Checking for draw condition
-		boolean isDraw = true;
-		for(int i = 0; i < 3; i++) {
-			
-			for(int j =0; j < 3; j++) {
-				
-				if(owner[i][j] == 0) {
-					isDraw = false;
-				}
-			}
-		}
-		
-		if(isDraw) {
-			
-			alert.setTitle("Draw");
-			alert.setContentText("Game is a draw");
-			alert.showAndWait();
-		}
 	}
 	
 	public void enableUnused() {

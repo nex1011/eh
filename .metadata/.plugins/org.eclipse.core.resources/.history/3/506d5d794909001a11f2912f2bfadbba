@@ -39,15 +39,16 @@ public class Server extends Thread{
 			while((request = br.readLine()) != null) {
 				
 				String[] input = request.split(",");
-				
-				System.out.println(request);
 				byte[] output = request.getBytes();
 				
-				for(OutputStream stream : clients) {
+				if(input[0].equals("1")) {
 					
-					stream.write(output);
-					stream.flush();
+					clients.get(1).write(output);
+				} else {
+
+					clients.get(0).write(output);
 				}
+				out.flush();
 			}
 		} catch(Throwable e) { System.out.println(e.toString()); }
 		finally {

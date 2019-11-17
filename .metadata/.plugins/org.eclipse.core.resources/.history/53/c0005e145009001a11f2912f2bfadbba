@@ -286,7 +286,7 @@ public class Client extends Application{
 		}
 		
 
-		owner[row][column] = player;
+		owner[0][0] = player;
 		checkWin(player);
 		
 	}
